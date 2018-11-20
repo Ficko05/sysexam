@@ -24,9 +24,8 @@ public class HotelDTO {
         this.description = hotel.getDescription();
         this.rating = hotel.getRating();
         this.zipCode = hotel.getZipCode();
-        this.picture = hotel.getPicture();
     }
-
+   
     @Override
     public String toString() {
         return "HotelDTO{" + "id=" + id + ", name=" + name + ", description=" + description + ", rating=" + rating + ", zipCode=" + zipCode + ", picture=" + picture + '}';

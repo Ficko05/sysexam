@@ -5,6 +5,8 @@
  */
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import facade.HotelMapper;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,6 +29,7 @@ public class HotelResource {
 
     @Context
     private UriInfo context;
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
     private final HotelMapper hm;
 
@@ -43,10 +46,10 @@ public class HotelResource {
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public String getHotels() {     
+        return gson.toJson(hm.getHotels());
     }
 
     /**
