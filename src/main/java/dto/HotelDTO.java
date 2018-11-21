@@ -24,7 +24,6 @@ public class HotelDTO {
         this.description = hotel.getDescription();
         this.rating = hotel.getRating();
         this.zipCode = hotel.getZipCode();
-        this.picture = hotel.getPicture();
     }
 
     public int getId() {
@@ -74,7 +73,6 @@ public class HotelDTO {
     public void setPicture(byte[] picture) {
         this.picture = picture;
     }
-    
     
 
     @Override

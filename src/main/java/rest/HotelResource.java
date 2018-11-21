@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.HotelDTO;
 import facade.HotelMapper;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
@@ -32,9 +33,10 @@ public class HotelResource {
 
     @Context
     private UriInfo context;
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
     private final HotelMapper hm;
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+   
     
 
     /**
@@ -50,10 +52,16 @@ public class HotelResource {
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("simple")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public String getHotels() {
+        List<HotelDTO> hotels = hm.getHotels();
+        for (HotelDTO hotel : hotels) {
+            hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
+        }
+        System.out.println(hotels);
+        
+        return gson.toJson(hotels);
     }
 
     /**
