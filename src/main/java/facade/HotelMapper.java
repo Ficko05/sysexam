@@ -27,4 +27,20 @@ public class HotelMapper {
         return hotels;
     }
 
+    public HotelDTO getHotel(int id) {
+        EntityManager em = emf.createEntityManager();
+        
+        TypedQuery<HotelDTO> query = em.createQuery("TODO",HotelDTO.class);
+        query.setParameter("id", id);
+        HotelDTO hotelDTO;
+        try {
+            hotelDTO = query.getSingleResult();
+            
+        } catch (Exception e) {
+            return null;
+        }
+        return hotelDTO;
+
+    }
+
 }

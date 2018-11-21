@@ -5,6 +5,9 @@
  */
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import dto.HotelDTO;
 import facade.HotelMapper;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,7 +18,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -29,6 +34,8 @@ public class HotelResource {
     private UriInfo context;
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
     private final HotelMapper hm;
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    
 
     /**
      * Creates a new instance of HotelResource
@@ -58,4 +65,20 @@ public class HotelResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public Response getHotel(@PathParam("id") int id) throws Exception{
+        HotelDTO hotelDTO = hm.getHotel(id);
+        
+        if (hotelDTO == null) {
+            throw new Exception();
+        }
+        return Response.ok(gson.toJson(hotelDTO)).build();
+        
+    }
+    
+    
+    
 }
