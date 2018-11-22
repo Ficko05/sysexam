@@ -16,3 +16,4 @@ nb-configuration
 
 # DATABASE
 persistence.xml
+/nbproject/
