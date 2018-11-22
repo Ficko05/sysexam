@@ -81,7 +81,7 @@ public class HotelResource {
         HotelDTO hotelDTO = hm.getHotel(id);
         
         if (hotelDTO == null) {
-            throw new Exception();
+            throw new Exception();//TODO
         }
         return Response.ok(gson.toJson(hotelDTO)).build();
         

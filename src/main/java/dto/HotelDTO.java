@@ -24,6 +24,15 @@ public class HotelDTO {
         this.description = hotel.getDescription();
         this.rating = hotel.getRating();
         this.zipCode = hotel.getZipCode();
+        this.picture = hotel.getPicture();
+    }
+    
+     public HotelDTO(int id, String name, String description, int rating, int zipCode) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.zipCode = zipCode;
     }
 
     public int getId() {

@@ -21,21 +21,20 @@ public class HotelMapper {
     public List<HotelDTO> getHotels() {
         EntityManager em = emf.createEntityManager();
 
-        TypedQuery<HotelDTO> query = em.createNamedQuery("Hotel.findAllDTO", HotelDTO.class);
-
+        TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h.id, h.name, h.description, h.rating, h.zipCode) FROM Hotel h", HotelDTO.class);
         List<HotelDTO> hotels = query.getResultList();
+
         return hotels;
     }
 
     public HotelDTO getHotel(int id) {
         EntityManager em = emf.createEntityManager();
-        
-        TypedQuery<HotelDTO> query = em.createQuery("TODO",HotelDTO.class);
+        TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h) FROM Hotel h WHERE h.id = :id", HotelDTO.class);
         query.setParameter("id", id);
         HotelDTO hotelDTO;
         try {
             hotelDTO = query.getSingleResult();
-            
+
         } catch (Exception e) {
             return null;
         }

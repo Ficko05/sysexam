@@ -11,17 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+
 /**
  *
  * @author Kristian
  */
 @Entity
 @Table(name = "HOTEL")
-
-@NamedQuery(name="Hotel.findAllDTO", query="SELECT new dto.HotelDTO(h) FROM Hotel h")
 public class Hotel implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Column(nullable = false, name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
