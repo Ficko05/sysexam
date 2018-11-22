@@ -30,6 +30,7 @@ public class HotelMapperTest {
      */
     @Test
     public void testGetHotels() {
+        System.out.println("Test: getHotels");
         assertTrue(true);
     }
     
