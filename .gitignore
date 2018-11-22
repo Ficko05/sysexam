@@ -15,5 +15,5 @@ buildNumber.properties
 nb-configuration
 
 # DATABASE
-#persistence.xml
+persistence.xml
 /nbproject/
