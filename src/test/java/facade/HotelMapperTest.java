@@ -13,9 +13,9 @@ import static org.junit.Assert.*;
  *
  * @author Dradrach
  */
-public class HotelMapperIT {
+public class HotelMapperTest {
     
-    public HotelMapperIT() {
+    public HotelMapperTest() {
         
     }
     
