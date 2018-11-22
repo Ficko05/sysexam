@@ -28,8 +28,9 @@ public class HotelMapperIT {
     /**
      * Test of getHotels method, of class HotelMapper.
      */
-    @org.junit.Test
+    @Test
     public void testGetHotels() {
+        assertTrue(true);
     }
     
 }
