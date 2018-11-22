@@ -12,7 +12,7 @@
       <property name="eclipselink.canonicalmodel.subpackage" value="test2" />
     </properties>
   </persistence-unit>  -->
-    <persistence-unit name="test3" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entity.Hotel</class>
     <class>entity.Role</class>
@@ -24,7 +24,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:derby:Users;create=true"/>
       <property name="eclipselink.logging.level" value="WARNING"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-      <property name="eclipselink.canonicalmodel.subpackage" value="test3"/>
+      <property name="eclipselink.canonicalmodel.subpackage" value="test"/>
     </properties>
   </persistence-unit>
 </persistence>
