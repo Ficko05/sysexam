@@ -16,3 +16,5 @@ nb-configuration
 
 # DATABASE
 persistence.xml
+/nbproject/
+/src/main/resources/META-INF/persistence.xml
