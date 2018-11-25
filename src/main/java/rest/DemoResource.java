@@ -56,7 +56,7 @@ public class DemoResource {
     @RolesAllowed("user")
     public String getFromUser() {
         String user = securityContext.getUserPrincipal().getName();
-        return "\"Hello from USER: " + user + "\"";
+        return "\"Welcome back, " + user + "\"";
     }
 
     @GET
@@ -65,7 +65,7 @@ public class DemoResource {
     @RolesAllowed("admin")
     public String getFromAdmin() {
         String user = securityContext.getUserPrincipal().getName();
-        return "\"Hello from ADMIN" + user + "\"";
+        return "\"You're logged in as " + user + "\"";
     }
 
     @GET
