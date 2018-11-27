@@ -20,6 +20,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -36,8 +37,6 @@ public class HotelResource {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
     private final HotelMapper hm;
-   
-    
 
     /**
      * Creates a new instance of HotelResource
@@ -45,7 +44,7 @@ public class HotelResource {
     public HotelResource() {
         hm = new HotelMapper(emf);
     }
-    
+
     /**
      * Retrieves representation of an instance of rest.HotelResource
      *
@@ -54,13 +53,15 @@ public class HotelResource {
     @GET
     @Path("simple")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getHotels() {
-        List<HotelDTO> hotels = hm.getHotels();
+    public String getHotels(@QueryParam("lowestPrice") Integer lowestPrice,
+            @QueryParam("highestPrice") Integer highestPrice ){
+
+        List<HotelDTO> hotels = hm.getHotels(lowestPrice, highestPrice);
         for (HotelDTO hotel : hotels) {
             hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
         }
         System.out.println(hotels);
-        
+
         return gson.toJson(hotels);
     }
 
@@ -73,20 +74,18 @@ public class HotelResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response getHotel(@PathParam("id") int id) throws Exception{
+    public Response getHotel(@PathParam("id") int id) throws Exception {
         HotelDTO hotelDTO = hm.getHotel(id);
-        
+
         if (hotelDTO == null) {
             throw new Exception();//TODO
         }
         return Response.ok(gson.toJson(hotelDTO)).build();
-        
+
     }
-    
-    
-    
+
 }

@@ -18,13 +18,25 @@ public class HotelMapper {
         this.emf = emf;
     }
 
-    public List<HotelDTO> getHotels() {
+    public List<HotelDTO> getHotels(Integer lowetPrice, Integer highestPrice) {
         EntityManager em = emf.createEntityManager();
 
+        if (lowetPrice == null && highestPrice == null){
+            
         TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h.id, h.name, h.description, h.rating, h.zipCode) FROM Hotel h", HotelDTO.class);
         List<HotelDTO> hotels = query.getResultList();
-
         return hotels;
+        }else{
+           //example for zip code
+            TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h.id, h.name, h.description, h.rating, h.zipCode) FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", HotelDTO.class);
+            query.setParameter("lowetPrice", lowetPrice);
+            query.setParameter("highestPrice", highestPrice);
+            
+        List<HotelDTO> hotels = query.getResultList();
+        return hotels;
+        }
+        
+
     }
 
     public HotelDTO getHotel(int id) {
