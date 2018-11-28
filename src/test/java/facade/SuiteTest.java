@@ -3,22 +3,42 @@ package facade;
 import entity.Hotel;
 import entity.Role;
 import entity.User;
+import facade.HotelMapperT;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.junit.runners.Suite;
 
-public class TestDB {
 
-    public EntityManagerFactory emf;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author Dradrach
+ */
+@RunWith(Suite.class)
 
-    public TestDB() {
-        
-    }
+@Suite.SuiteClasses({
+    HotelMapperT.class
+})
 
-    //instead of running this before each test, you can just make a transaction in every test and then roll back
-    public void setupDB() {
-        if(emf.isOpen())
-            emf.close();
+public class SuiteTest {
+
+    static EntityManagerFactory emf;
+
+    @BeforeClass
+    public static void SetupDB() {
+        System.out.println("Setup DB");
+
         emf = Persistence.createEntityManagerFactory("test");
         EntityManager em = emf.createEntityManager();
 
