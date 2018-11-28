@@ -14,24 +14,24 @@ import static org.junit.Assert.*;
  * @author Dradrach
  */
 public class HotelMapperTest {
-    
-    public HotelMapperTest() {
-        
-    }
-    
-    
-    @Before
-    public void setUp() {
-       new TestDB().setupDB();
-    }
-
-    /**
-     * Test of getHotels method, of class HotelMapper.
-     */
-    @Test
-    public void testGetHotels() {
-        System.out.println("Test: getHotels");
-        assertTrue(true);
-    }
+//    
+//    public HotelMapperTest() {
+//        
+//    }
+//    
+//    
+//    @Before
+//    public void setUp() {
+//       new TestDB().setupDB();
+//    }
+//
+//    /**
+//     * Test of getHotels method, of class HotelMapper.
+//     */
+//    @Test
+//    public void testGetHotels() {
+//        System.out.println("Test: getHotels");
+//        assertTrue(true);
+//    }
     
 }

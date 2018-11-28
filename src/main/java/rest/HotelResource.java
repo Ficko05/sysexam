@@ -7,8 +7,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import dto.HotelDTO;
 import facade.HotelMapper;
+import imageHandling.DataUriEncoder;
+import imageHandling.ImageType;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -36,8 +39,6 @@ public class HotelResource {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
     private final HotelMapper hm;
-   
-    
 
     /**
      * Creates a new instance of HotelResource
@@ -45,7 +46,7 @@ public class HotelResource {
     public HotelResource() {
         hm = new HotelMapper(emf);
     }
-    
+
     /**
      * Retrieves representation of an instance of rest.HotelResource
      *
@@ -60,7 +61,7 @@ public class HotelResource {
             hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
         }
         System.out.println(hotels);
-        
+
         return gson.toJson(hotels);
     }
 
@@ -73,20 +74,22 @@ public class HotelResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response getHotel(@PathParam("id") int id) throws Exception{
+    public Response getHotel(@PathParam("id") int id) throws Exception {
         HotelDTO hotelDTO = hm.getHotel(id);
-        
+        DataUriEncoder uriEncoder = new DataUriEncoder();
+        String full = uriEncoder.encode(hotelDTO.getPicture(), ImageType.fromData(hotelDTO.getPicture()));
+        hotelDTO.setPicture(null);
+        JsonElement jsonElement = gson.toJsonTree(hotelDTO);
+        jsonElement.getAsJsonObject().addProperty("picture", full);
         if (hotelDTO == null) {
             throw new Exception();//TODO
         }
-        return Response.ok(gson.toJson(hotelDTO)).build();
-        
+        return Response.ok(gson.toJson(jsonElement)).build();
+
     }
-    
-    
-    
+
 }
