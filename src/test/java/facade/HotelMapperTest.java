@@ -1,37 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package facade;
 
+import dto.HotelDTO;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Dradrach
- */
 public class HotelMapperTest {
-    
-    public HotelMapperTest() {
-        
-    }
-    
-    
+
+    private TestDB testDB = new TestDB();;
+
     @Before
     public void setUp() {
-       new TestDB().setupDB();
+        testDB.setupDB();
     }
 
     /**
      * Test of getHotels method, of class HotelMapper.
      */
     @Test
-    public void testGetHotels() {
-        System.out.println("Test: getHotels");
-        assertTrue(true);
+    public void testGetHotelsBothNull() {
+        HotelMapper hotelmapper = new HotelMapper(testDB.emf);
+        List<HotelDTO> result = hotelmapper.getHotels(null, null);
+
+        assertEquals(2, result.size());
+
+    }
+
+    @Test
+    public void testGetHotelsBothNonNull() {
+
+        HotelMapper hotelmapper = new HotelMapper(testDB.emf);
+        List<HotelDTO> result = hotelmapper.getHotels(1000, 2000);
+
+        assertEquals(2, result.size());
+
+    }
+
+    @Test
+    public void testGetHotelOneNull(){
+        
+        HotelMapper hotelmapper = new HotelMapper(testDB.emf);
+        List<HotelDTO> result = hotelmapper.getHotels(null, 1500);
+
+        assertEquals(1, result.size());
+        
     }
     
 }

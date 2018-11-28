@@ -1,6 +1,5 @@
 package facade;
 
-
 import entity.Hotel;
 import entity.Role;
 import entity.User;
@@ -8,23 +7,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Dradrach
- */
 public class TestDB {
-    EntityManagerFactory emf;
+
+    public EntityManagerFactory emf;
 
     public TestDB() {
-        emf = Persistence.createEntityManagerFactory("test");
+        
     }
-    
+
+    //instead of running this before each test, you can just make a transaction in every test and then roll back
     public void setupDB() {
+        if(emf.isOpen())
+            emf.close();
+        emf = Persistence.createEntityManagerFactory("test");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
@@ -37,11 +32,11 @@ public class TestDB {
         User both = new User("user_admin", "test");
         both.addRole(userRole);
         both.addRole(adminRole);
-        
+
         //id, name, description, rating, zipCode, picture
         Hotel hotel1 = new Hotel(1, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
         Hotel hotel2 = new Hotel(2, "secondHotel", "Second Hotel", 20, 2000, new byte[1]);
-        
+
         em.persist(hotel1);
         em.persist(hotel2);
         em.persist(userRole);

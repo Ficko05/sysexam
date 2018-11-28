@@ -6,10 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author Kristian
- */
 public class HotelMapper {
 
     EntityManagerFactory emf;
@@ -18,24 +14,20 @@ public class HotelMapper {
         this.emf = emf;
     }
 
-    public List<HotelDTO> getHotels(Integer lowetPrice, Integer highestPrice) {
+    public List<HotelDTO> getHotels(Integer lowestPrice, Integer highestPrice) {
         EntityManager em = emf.createEntityManager();
 
-        if (lowetPrice == null && highestPrice == null){
-            
-        TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h.id, h.name, h.description, h.rating, h.zipCode) FROM Hotel h", HotelDTO.class);
+        //rip
+        lowestPrice = lowestPrice == null ? Integer.MIN_VALUE : lowestPrice;
+        highestPrice = highestPrice == null ? Integer.MAX_VALUE : highestPrice;
+
+        //example for zip code
+        TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h.id, h.name, h.description, h.rating, h.zipCode) FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", HotelDTO.class);
+        query.setParameter("lowestPrice", lowestPrice);
+        query.setParameter("highestPrice", highestPrice);
+
         List<HotelDTO> hotels = query.getResultList();
         return hotels;
-        }else{
-           //example for zip code
-            TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h.id, h.name, h.description, h.rating, h.zipCode) FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", HotelDTO.class);
-            query.setParameter("lowetPrice", lowetPrice);
-            query.setParameter("highestPrice", highestPrice);
-            
-        List<HotelDTO> hotels = query.getResultList();
-        return hotels;
-        }
-        
 
     }
 
