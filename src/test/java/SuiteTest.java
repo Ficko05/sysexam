@@ -1,30 +1,42 @@
-package facade;
-
 
 import entity.Hotel;
 import entity.Role;
 import entity.User;
+import facade.HotelMapperT;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.junit.runners.Suite;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
  * @author Dradrach
  */
-public class TestDB {
-    EntityManagerFactory emf;
+@RunWith(Suite.class)
 
-    public TestDB() {
-        emf = Persistence.createEntityManagerFactory("test");
-    }
+@Suite.SuiteClasses({
+HotelMapperT.class
+})
+
+public class SuiteTest {
+static EntityManagerFactory emf;
     
-    public void setupDB() {
+    @BeforeClass
+    public static void SetupDB(){
+                System.out.println("Setup DB");
+        emf = Persistence.createEntityManagerFactory("test");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();

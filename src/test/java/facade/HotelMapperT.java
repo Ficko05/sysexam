@@ -13,20 +13,13 @@ import static org.junit.Assert.*;
  *
  * @author Dradrach
  */
-public class HotelMapperTest {
+public class HotelMapperT{
     
-    public HotelMapperTest() {
+    public HotelMapperT() {
         
     }
-    
-    
-    @Before
-    public void setUp() {
-       new TestDB().setupDB();
-    }
-
     /**
-     * Test of getHotels method, of class HotelMapper.
+     * Test of getHotels method, of class HotelMapperT.
      */
     @Test
     public void testGetHotels() {
