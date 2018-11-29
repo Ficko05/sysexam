@@ -23,6 +23,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -55,8 +56,10 @@ public class HotelResource {
     @GET
     @Path("simple")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getHotels() {
-        List<HotelDTO> hotels = hm.getHotels();
+    public String getHotels(@QueryParam("lowestPrice") Integer lowestPrice,
+            @QueryParam("highestPrice") Integer highestPrice ){
+
+        List<HotelDTO> hotels = hm.getHotels(lowestPrice, highestPrice);
         for (HotelDTO hotel : hotels) {
             hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
         }
@@ -89,7 +92,6 @@ public class HotelResource {
             throw new Exception();//TODO
         }
         return Response.ok(gson.toJson(jsonElement)).build();
-
     }
 
 }
