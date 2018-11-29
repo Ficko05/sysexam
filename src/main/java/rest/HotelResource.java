@@ -7,8 +7,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import dto.HotelDTO;
 import facade.HotelMapper;
+import imageHandling.DataUriEncoder;
+import imageHandling.ImageType;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -80,12 +83,40 @@ public class HotelResource {
     @Path("{id}")
     public Response getHotel(@PathParam("id") int id) throws Exception {
         HotelDTO hotelDTO = hm.getHotel(id);
-
+        DataUriEncoder uriEncoder = new DataUriEncoder();
+        String full = uriEncoder.encode(hotelDTO.getPicture(), ImageType.fromData(hotelDTO.getPicture()));
+        hotelDTO.setPicture(null);
+        JsonElement jsonElement = gson.toJsonTree(hotelDTO);
+        jsonElement.getAsJsonObject().addProperty("picture", full);
         if (hotelDTO == null) {
             throw new Exception();//TODO
         }
-        return Response.ok(gson.toJson(hotelDTO)).build();
-
+        return Response.ok(gson.toJson(jsonElement)).build();
     }
+
+    /**
+     * returns list of Hotels in JSON from a given ZipS
+     * @param zip
+     * @return
+     * @throws Exception 
+     */
+    @GET
+    @Produces (MediaType.APPLICATION_JSON)
+    @Path("zip/{zip}")
+    public String getHotelFromZip(@PathParam("zip") int zip) throws Exception{
+        List<HotelDTO> hotelDTOs = hm.getHotelFromZip(zip);
+        
+        for (HotelDTO hotel : hotelDTOs) {
+            hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
+//            hotel.setPicture(null);
+        }
+        if (hotelDTOs == null ^ hotelDTOs.isEmpty()) {
+            throw new Exception();//TODO
+        }
+        
+        return gson.toJson(hotelDTOs);
+    }
+    
+    
 
 }

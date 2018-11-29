@@ -1,3 +1,5 @@
+package facade;
+
 
 import entity.Hotel;
 import entity.Role;
