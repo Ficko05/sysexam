@@ -35,6 +35,7 @@ private static EntityManagerFactory emf;
     public static void SetupDB(){
         System.out.println("Setup DB");
         emf = Persistence.createEntityManagerFactory("test");
+        System.out.println("Setup emf " + emf);
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
