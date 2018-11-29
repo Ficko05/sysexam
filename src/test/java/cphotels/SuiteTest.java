@@ -1,8 +1,9 @@
+package cphotels;
+
 
 import entity.Hotel;
 import entity.Role;
 import entity.User;
-import facade.HotelMapperT;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,7 +28,6 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-HotelMapperT.class
 })
 
 public class SuiteTest {

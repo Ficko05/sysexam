@@ -1,5 +1,6 @@
 ----------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 Wed Nov 28 11:17:11 CET 2018:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-59d2-938f-0000059ec480 
@@ -17,12 +18,34 @@ Wed Nov 28 14:33:57 CET 2018:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5a86-b57f-000005927618 
 on database directory C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
 Loaded from file:/C:/Users/steven/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+=======
+Mon Nov 26 14:47:38 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5046-86e5-000004f6b178 
+on database directory C:\Users\Ficko\Desktop\datamatiker\3.Sem\Sysexam\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
+Loaded from file:/C:/Users/Ficko/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+>>>>>>> Stashed changes
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_144-b01
 user.dir=C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam
 >>>>>>> hotelMapper
 os.name=Windows 10
 os.arch=amd64
+<<<<<<< Updated upstream
 os.version=10.0
+=======
+os.version=6.1
+=======
+Wed Nov 28 09:57:48 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5989-e476-000005905820 
+on database directory C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
+Loaded from file:/C:/Users/steven/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_144-b01
+user.dir=C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+>>>>>>> hotelMapper
+>>>>>>> Stashed changes
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

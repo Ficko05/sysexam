@@ -63,6 +63,7 @@ public class HotelMapper {
     public List<HotelDTO> getHotelFromZip(int zipCode) {
         EntityManager em = emf.createEntityManager();
         TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h.id, h.name, h.description, h.rating, h.zipCode) From Hotel h WHERE h.zipCode =:zipCode", HotelDTO.class);
+
         query.setParameter("zipCode", zipCode);
         List<HotelDTO> listHotelDTO;
         try {
