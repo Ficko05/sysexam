@@ -59,7 +59,7 @@ public class HotelResource {
     public String getHotels(@QueryParam("lowestPrice") Integer lowestPrice,
             @QueryParam("highestPrice") Integer highestPrice ){
 
-        List<HotelDTO> hotels = hm.getHotels(lowestPrice, highestPrice);
+        List<HotelDTO> hotels = hm.getHotelsByPrice(lowestPrice, highestPrice);
         for (HotelDTO hotel : hotels) {
             hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
         }
@@ -104,7 +104,7 @@ public class HotelResource {
     @Produces (MediaType.APPLICATION_JSON)
     @Path("zip/{zip}")
     public String getHotelFromZip(@PathParam("zip") int zip) throws Exception{
-        List<HotelDTO> hotelDTOs = hm.getHotelFromZip(zip);
+        List<HotelDTO> hotelDTOs = hm.getHotelsFromZip(zip);
         
         for (HotelDTO hotel : hotelDTOs) {
             hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");

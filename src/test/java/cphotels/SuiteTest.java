@@ -1,6 +1,7 @@
 package cphotels;
 
 
+import cphotels.facade.HotelMapperT;
 import entity.Hotel;
 import entity.Role;
 import entity.User;
@@ -24,6 +25,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
+    HotelMapperT.class
 })
 
 public class SuiteTest {
@@ -31,7 +33,6 @@ private static EntityManagerFactory emf;
     
     @BeforeClass
     public static void SetupDB(){
-        
         System.out.println("Setup DB");
         emf = Persistence.createEntityManagerFactory("test");
         EntityManager em = emf.createEntityManager();
@@ -49,19 +50,24 @@ private static EntityManagerFactory emf;
         
         //id, name, description, rating, zipCode, picture
         Hotel hotel1 = new Hotel(1, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
-        Hotel hotel2 = new Hotel(2, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
-        Hotel hotel3 = new Hotel(3, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
-        Hotel hotel4 = new Hotel(4, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
-        Hotel hotel5 = new Hotel(2, "secondHotel", "Second Hotel", 20, 2000, new byte[1]);
+        Hotel hotel2 = new Hotel(2, "secondHotel", "First Hotel", 10, 1000, new byte[1]);
+        Hotel hotel3 = new Hotel(3, "thirdHotel", "First Hotel", 10, 1000, new byte[1]);
+        Hotel hotel4 = new Hotel(4, "fourthHotel", "First Hotel", 10, 1100, new byte[1]);
+        Hotel hotel5 = new Hotel(5, "fifthHotel", "Second Hotel", 20, 2000, new byte[1]);
         
         em.persist(hotel1);
         em.persist(hotel2);
+        em.persist(hotel3);
+        em.persist(hotel4);
+        em.persist(hotel5);
         em.persist(userRole);
         em.persist(adminRole);
         em.persist(user);
         em.persist(admin);
         em.persist(both);
+        
         em.getTransaction().commit();
+        
     }
 
     public static EntityManagerFactory getEmf() {
