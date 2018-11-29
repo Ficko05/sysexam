@@ -1,5 +1,6 @@
 ----------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Wed Nov 28 15:03:19 CET 2018:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5aa1-997e-000004fbfe48 
 on database directory memory:C:\Users\Ficko\Desktop\datamatiker\3.Sem\Sysexam\sysexam\testDB with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
@@ -11,6 +12,11 @@ os.name=Windows 7
 os.arch=amd64
 os.version=6.1
 =======
+Thu Nov 29 10:48:51 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5ede-fbb3-000005992788 
+on database directory memory:C:\Users\Dradrach\Desktop\syseksamen\sysexam\testDB with class loader sun.misc.Launcher$AppClassLoader@232204a1 
+>>>>>>> a86c9e509ef85a6bca14d5c7da24e544782cc8f7
+=======
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< HEAD
@@ -21,6 +27,7 @@ Thu Nov 29 09:32:01 CET 2018:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5e98-a66a-0000059a3c50 
 >>>>>>> e65835e3f345271ef2c1cda3572e11d077ee4974
 on database directory C:\Users\Dradrach\Desktop\syseksamen\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@232204a1 
+>>>>>>> 35dac9d093e0b9f56647d21e1e2ee9fe2bc780b8
 Loaded from file:/C:/Users/Dradrach/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_152-b16
