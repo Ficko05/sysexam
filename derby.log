@@ -1,4 +1,5 @@
 ----------------------------------------------------------------
+<<<<<<< HEAD
 Wed Nov 28 11:17:11 CET 2018:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-59d2-938f-0000059ec480 
 on database directory C:\Users\Dradrach\Desktop\syseksamen\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@232204a1 
@@ -6,6 +7,15 @@ Loaded from file:/C:/Users/Dradrach/.m2/repository/org/apache/derby/derby/10.14.
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_152-b16
 user.dir=C:\Users\Dradrach\Desktop\syseksamen\sysexam
+=======
+Wed Nov 28 14:33:57 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5a86-b57f-000005927618 
+on database directory C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
+Loaded from file:/C:/Users/steven/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_144-b01
+user.dir=C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam
+>>>>>>> hotelMapper
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

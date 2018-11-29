@@ -5,6 +5,11 @@
  */
 package facade;
 
+import dto.HotelDTO;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -16,15 +21,45 @@ import static org.junit.Assert.*;
 
 public class HotelMapperT{
     
+<<<<<<< HEAD:src/test/java/facade/HotelMapperT.java
     public HotelMapperT() {
         
     }
     /**
      * Test of getHotels method, of class HotelMapperT.
+=======
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+    public HotelMapperTest() {
+        
+    }
+    
+    
+    @Before
+    public void setUp() {
+       new TestDB().setupDB();
+       
+    }
+
+//    /**
+//     * Test of getHotels method, of class HotelMapper.
+//     */
+//    @Test
+//    public void testGetHotels() {
+//        System.out.println("Test: getHotels");
+//        assertTrue(true);
+//    }
+    
+    /**
+     * Test for getHotelFromZip
+>>>>>>> hotelMapper:src/test/java/facade/HotelMapperTest.java
      */
     @Test
-    public void testGetHotels() {
-        System.out.println("Test: getHotels");
-        assertTrue(true);
+    public void testGetHotelsFromZip(){
+        System.out.println("Test: getHotelsFormZip");
+        HotelMapper hotelMap = new HotelMapper(emf);
+        List<HotelDTO> listOfHotels = hotelMap.getHotelFromZip(1100);
+        int result = listOfHotels.size();
+        
+        assertEquals(6, result);
     }
 }

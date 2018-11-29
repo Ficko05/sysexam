@@ -1,6 +1,7 @@
 package facade;
 
 import dto.HotelDTO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -52,6 +53,25 @@ public class HotelMapper {
         }
         return hotelDTO;
 
+    }
+    /**
+     * Method takes a ZipCode and returns a list of all matching Hotel(DTO)
+     * with given ZipCode
+     * @param zipCode
+     * @return 
+     */
+    public List<HotelDTO> getHotelFromZip(int zipCode) {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<HotelDTO> query = em.createQuery("SELECT new dto.HotelDTO(h.id, h.name, h.description, h.rating, h.zipCode) From Hotel h WHERE h.zipCode =:zipCode", HotelDTO.class);
+        query.setParameter("zipCode", zipCode);
+        List<HotelDTO> listHotelDTO;
+        try {
+            listHotelDTO = query.getResultList();
+
+        } catch (Exception e) {
+            return null;
+        }
+        return listHotelDTO;
     }
 
 }
