@@ -14,6 +14,7 @@ public class HotelDTO {
     private int rating;
     private int zipCode;
     private byte[] picture;
+    private int lowestPrice;
 
     public HotelDTO() {
     }
@@ -39,9 +40,14 @@ public class HotelDTO {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getLowestPrice() {
+        return lowestPrice;
     }
+
+    public void setLowestPrice(int lowestPrice) {
+        this.lowestPrice = lowestPrice;
+    }
+
 
     public String getName() {
         return name;
