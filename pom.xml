@@ -13,7 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+      
     <dependencies>
         <dependency>
             <groupId>org.mindrot</groupId>
@@ -71,6 +71,11 @@
             <version>10.14.2.0</version>
         </dependency>
         <dependency>
+            <groupId>socialSDK</groupId>
+            <artifactId>socialSDK</artifactId>
+            <version>0.34</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -89,10 +94,31 @@
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>6.2</version>
         </dependency>
+        <dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpclient</artifactId>
+    <version>4.5.3</version>
+            <type>jar</type>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+             <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+            <execution>
+                <phase>install</phase>
+                <goals>
+                    <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
