@@ -20,13 +20,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -86,7 +83,7 @@ public class SocialResource {
     @Path("request_authorization")
     @Produces(MediaType.APPLICATION_JSON)
     public Response onAuthResponse() throws IOException, Exception {
-
+        System.out.println("Test");
         if (booking == null) {
             setUp();
         }
@@ -129,6 +126,7 @@ public class SocialResource {
 
     @GET
     @Path("posted_on_social")
+    @Produces(MediaType.APPLICATION_JSON)
     public String checkIfPostedOnSocial(@QueryParam("id") String userID) throws Exception {
         Boolean posted = postedOnSocial.get(userID);
         if (posted == null) {
