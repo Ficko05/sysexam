@@ -1,6 +1,7 @@
 package cphotels;
 
 
+import cphotels.facade.HotelMapperT;
 import entity.Hotel;
 import entity.Role;
 import entity.User;
@@ -24,6 +25,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
+    HotelMapperT.class
 })
 
 public class SuiteTest {
@@ -34,6 +36,7 @@ private static EntityManagerFactory emf;
         
         System.out.println("Setup DB");
         emf = Persistence.createEntityManagerFactory("test");
+        System.out.println("Setup emf " + emf);
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();

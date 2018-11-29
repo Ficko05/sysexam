@@ -20,11 +20,11 @@ import static org.junit.Assert.*;
  *
  * @author Dradrach
  */
-public class HotelMapperTest {
+public class HotelMapperT {
     
     private final EntityManagerFactory emf = SuiteTest.getEmf();
     private HotelMapper hotelMapper = new HotelMapper(emf);
-    public HotelMapperTest() {
+    public HotelMapperT() {
         
     }
     
@@ -45,6 +45,8 @@ public class HotelMapperTest {
     @Test
     public void testGetHotelsFromZip(){
         System.out.println("Test: getHotelsFormZip");
+        System.out.println("EMF test" + emf);
+        System.out.println("Mapper test" + hotelMapper);
         List<HotelDTO> listOfHotels = hotelMapper.getHotelFromZip(1100);
         int result = listOfHotels.size();
         
