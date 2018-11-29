@@ -83,7 +83,6 @@ public class SocialResource {
     @Path("request_authorization")
     @Produces(MediaType.APPLICATION_JSON)
     public Response onAuthResponse() throws IOException, Exception {
-        System.out.println("Test");
         if (booking == null) {
             setUp();
         }
