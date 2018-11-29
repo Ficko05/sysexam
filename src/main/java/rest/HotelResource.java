@@ -94,4 +94,29 @@ public class HotelResource {
         return Response.ok(gson.toJson(jsonElement)).build();
     }
 
+    /**
+     * returns list of Hotels in JSON from a given ZipS
+     * @param zip
+     * @return
+     * @throws Exception 
+     */
+    @GET
+    @Produces (MediaType.APPLICATION_JSON)
+    @Path("zip/{zip}")
+    public String getHotelFromZip(@PathParam("zip") int zip) throws Exception{
+        List<HotelDTO> hotelDTOs = hm.getHotelFromZip(zip);
+        
+        for (HotelDTO hotel : hotelDTOs) {
+            hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
+//            hotel.setPicture(null);
+        }
+        if (hotelDTOs == null ^ hotelDTOs.isEmpty()) {
+            throw new Exception();//TODO
+        }
+        
+        return gson.toJson(hotelDTOs);
+    }
+    
+    
+
 }

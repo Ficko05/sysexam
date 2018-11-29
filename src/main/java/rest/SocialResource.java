@@ -139,6 +139,7 @@ public class SocialResource {
         return gson.toJson(response);
     }
 
+    
     private void createPost(AuthResponse authResponse) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost request = new HttpPost(baseURL + "posts/text");

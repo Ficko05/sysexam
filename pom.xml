@@ -71,10 +71,14 @@
             <version>10.14.2.0</version>
         </dependency>
         <dependency>
-            <groupId>socialSDK</groupId>
-            <artifactId>socialSDK</artifactId>
-            <version>0.13</version>
-        </dependency>
+    <groupId>com.group3</groupId>
+    <artifactId>social-sdk</artifactId>
+    <version>1.0</version>
+    <scope>system</scope>
+    <systemPath>${project.basedir}/lib/social-service-sdk.jar</systemPath>
+      <type>jar</type>
+  <optional>true</optional>
+</dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>

@@ -1,8 +1,9 @@
+package cphotels;
+
 
 import entity.Hotel;
 import entity.Role;
 import entity.User;
-import facade.HotelMapperT;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,7 +28,6 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-HotelMapperT.class
 })
 
 public class SuiteTest {
@@ -52,7 +52,10 @@ static EntityManagerFactory emf;
         
         //id, name, description, rating, zipCode, picture
         Hotel hotel1 = new Hotel(1, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
-        Hotel hotel2 = new Hotel(2, "secondHotel", "Second Hotel", 20, 2000, new byte[1]);
+        Hotel hotel2 = new Hotel(2, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
+        Hotel hotel3 = new Hotel(3, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
+        Hotel hotel4 = new Hotel(4, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
+        Hotel hotel5 = new Hotel(2, "secondHotel", "Second Hotel", 20, 2000, new byte[1]);
         
         em.persist(hotel1);
         em.persist(hotel2);
