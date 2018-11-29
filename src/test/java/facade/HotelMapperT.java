@@ -18,48 +18,25 @@ import static org.junit.Assert.*;
  *
  * @author Dradrach
  */
+public class HotelMapperT {
 
-public class HotelMapperT{
-    
-<<<<<<< HEAD:src/test/java/facade/HotelMapperT.java
-    public HotelMapperT() {
-        
-    }
-    /**
-     * Test of getHotels method, of class HotelMapperT.
-=======
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
-    public HotelMapperTest() {
-        
-    }
-    
-    
-    @Before
-    public void setUp() {
-       new TestDB().setupDB();
-       
+
+    public HotelMapperT() {
+
     }
 
-//    /**
-//     * Test of getHotels method, of class HotelMapper.
-//     */
-//    @Test
-//    public void testGetHotels() {
-//        System.out.println("Test: getHotels");
-//        assertTrue(true);
-//    }
-    
     /**
      * Test for getHotelFromZip
->>>>>>> hotelMapper:src/test/java/facade/HotelMapperTest.java
      */
     @Test
-    public void testGetHotelsFromZip(){
+
+    public void testGetHotelsFromZip() {
         System.out.println("Test: getHotelsFormZip");
         HotelMapper hotelMap = new HotelMapper(emf);
         List<HotelDTO> listOfHotels = hotelMap.getHotelFromZip(1100);
         int result = listOfHotels.size();
-        
+
         assertEquals(6, result);
     }
 }
