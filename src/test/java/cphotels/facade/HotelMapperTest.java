@@ -5,6 +5,7 @@
  */
 package cphotels.facade;
 
+import cphotels.SuiteTest;
 import dto.HotelDTO;
 import facade.HotelMapper;
 import java.util.List;
@@ -21,7 +22,8 @@ import static org.junit.Assert.*;
  */
 public class HotelMapperTest {
     
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+    private final EntityManagerFactory emf = SuiteTest.getEmf();
+    private HotelMapper hotelMapper = new HotelMapper(emf);
     public HotelMapperTest() {
         
     }
@@ -43,11 +45,37 @@ public class HotelMapperTest {
     @Test
     public void testGetHotelsFromZip(){
         System.out.println("Test: getHotelsFormZip");
-        HotelMapper hotelMap = new HotelMapper(emf);
-        List<HotelDTO> listOfHotels = hotelMap.getHotelFromZip(1100);
+        List<HotelDTO> listOfHotels = hotelMapper.getHotelFromZip(1100);
         int result = listOfHotels.size();
         
         assertEquals(6, result);
     }
     
+    
+     @Test
+    public void testGetHotelsBothNull() {
+        
+        List<HotelDTO> result = hotelMapper.getHotels(null, null);
+
+        assertEquals(2, result.size());
+
+    }
+
+    @Test
+    public void testGetHotelsBothNonNull() {
+
+        List<HotelDTO> result = hotelMapper.getHotels(1000, 2000);
+
+        assertEquals(2, result.size());
+
+    }
+
+    @Test
+    public void testGetHotelOneNull(){
+        
+        List<HotelDTO> result = hotelMapper.getHotels(null, 1500);
+
+        assertEquals(1, result.size());
+        
+    }
 }

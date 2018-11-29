@@ -1,71 +1,13 @@
 ----------------------------------------------------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
-Wed Nov 28 15:03:19 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5aa1-997e-000004fbfe48 
-on database directory memory:C:\Users\Ficko\Desktop\datamatiker\3.Sem\Sysexam\sysexam\testDB with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
-Loaded from file:/C:/Users/Ficko/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_144-b01
-user.dir=C:\Users\Ficko\Desktop\datamatiker\3.Sem\Sysexam\sysexam
-os.name=Windows 7
-os.arch=amd64
-os.version=6.1
-=======
-Thu Nov 29 10:48:51 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5ede-fbb3-000005992788 
+Thu Nov 29 11:40:04 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5f0d-e1a4-000005df7918 
 on database directory memory:C:\Users\Dradrach\Desktop\syseksamen\sysexam\testDB with class loader sun.misc.Launcher$AppClassLoader@232204a1 
->>>>>>> a86c9e509ef85a6bca14d5c7da24e544782cc8f7
-=======
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-Wed Nov 28 11:17:11 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-59d2-938f-0000059ec480 
-=======
-Thu Nov 29 09:32:01 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5e98-a66a-0000059a3c50 
->>>>>>> e65835e3f345271ef2c1cda3572e11d077ee4974
-on database directory C:\Users\Dradrach\Desktop\syseksamen\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@232204a1 
->>>>>>> 35dac9d093e0b9f56647d21e1e2ee9fe2bc780b8
 Loaded from file:/C:/Users/Dradrach/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_152-b16
 user.dir=C:\Users\Dradrach\Desktop\syseksamen\sysexam
-=======
-Wed Nov 28 14:33:57 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5a86-b57f-000005927618 
-on database directory C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
-Loaded from file:/C:/Users/steven/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-=======
-Mon Nov 26 14:47:38 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5046-86e5-000004f6b178 
-on database directory C:\Users\Ficko\Desktop\datamatiker\3.Sem\Sysexam\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
-Loaded from file:/C:/Users/Ficko/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
->>>>>>> Stashed changes
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_144-b01
-user.dir=C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam
->>>>>>> hotelMapper
-os.name=Windows 10
-os.arch=amd64
-<<<<<<< Updated upstream
-os.version=10.0
-=======
-os.version=6.1
-=======
-Wed Nov 28 09:57:48 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5989-e476-000005905820 
-on database directory C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
-Loaded from file:/C:/Users/steven/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_144-b01
-user.dir=C:\Users\steven\Desktop\Datamatiker 17\EksamensProject\sysexam
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
->>>>>>> hotelMapper
->>>>>>> Stashed changes
->>>>>>> 35dac9d093e0b9f56647d21e1e2ee9fe2bc780b8
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

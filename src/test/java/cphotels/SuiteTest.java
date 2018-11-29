@@ -7,12 +7,8 @@ import entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
 
 /*
@@ -31,11 +27,12 @@ import org.junit.runners.Suite;
 })
 
 public class SuiteTest {
-static EntityManagerFactory emf;
+private static EntityManagerFactory emf;
     
     @BeforeClass
     public static void SetupDB(){
-                System.out.println("Setup DB");
+        
+        System.out.println("Setup DB");
         emf = Persistence.createEntityManagerFactory("test");
         EntityManager em = emf.createEntityManager();
 
@@ -66,4 +63,10 @@ static EntityManagerFactory emf;
         em.persist(both);
         em.getTransaction().commit();
     }
+
+    public static EntityManagerFactory getEmf() {
+        return emf;
+    }
+    
+    
 }
