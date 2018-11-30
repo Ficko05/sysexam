@@ -19,7 +19,7 @@
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
-        </dependency>
+        </dependency> <!--
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
@@ -29,8 +29,13 @@
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
             <version>2.26</version>
+        </dependency> -->
+        <dependency>
+            <groupId>org.glassfish.jersey.bundles</groupId>
+            <artifactId>jaxrs-ri</artifactId>
+            <version>2.27</version>
+            <type>zip</type>
         </dependency>
-        
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -48,6 +53,11 @@
             <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
+                    <dependency>
+                        <groupId>javax.activation</groupId>
+                        <artifactId>activation</artifactId>
+                        <version>1.1.1</version>
+                    </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -69,11 +79,6 @@
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>10.14.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>socialSDK</groupId>
-            <artifactId>socialSDK</artifactId>
-            <version>0.34</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -166,5 +171,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

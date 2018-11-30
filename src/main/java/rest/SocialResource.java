@@ -8,6 +8,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.group3.ssdk.*;
+import dto.RequestSocialDTO;
 import dto.SocialPost;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -43,6 +44,7 @@ public class SocialResource {
     private static PermissionTemplate booking;
     private static Gson gson = SpecializedGson.create();
     private static String baseURL;
+    private static String apiBaseURL;
     private static Map<String, Boolean> postedOnSocial = new HashMap<>();
 
     /**
@@ -54,16 +56,18 @@ public class SocialResource {
 
     private static void setUp() throws Exception {
         //The URL for socials REST API
-        baseURL = "http://d33cc9c1.ngrok.io/semester-3-exam-rest/api/";
+        baseURL = "https://tvestergaard.com/semester-3-exam-rest/";
+        
+        apiBaseURL = baseURL + "api/";
 
         //The URL for the REST endpoint we tell social to call us back on
-        String authCallback = "http://f65b6290.ngrok.io/sysexam/api/social/authentication_callback";
+        String authCallback = "https://ionsight.dk/sysexam/api/social/authentication_callback";
 
         //MemoryAuthRequestStore saves an ID when our user clicks the button (before we call social API) 
         //When social call us back after the user has logged in on their site social call with that id (needed because they
         //do not return the information when we call, they call us back afterwards, so we have no idea of knowing who they talk about without that id)
         //We can then check which user they return information for.
-        social = new SocialSDK(baseURL, authCallback, new MemoryAuthRequestStore());
+        social = new SocialSDK(apiBaseURL, authCallback, new MemoryAuthRequestStore());
         //Registers a user for our REST api (not our users) on social
         social.register("CPHotels", "1234");
         //Authentificates CPHotels on social, like a log in
@@ -79,6 +83,7 @@ public class SocialResource {
     }
 
     //Endpoint received from client and notifies social (when end user want to log in/has clicked button)
+    //Post because it creates something (on socials end, doesn't have to take in parameters)
     @POST
     @Path("request_authorization")
     @Produces(MediaType.APPLICATION_JSON)
@@ -105,41 +110,44 @@ public class SocialResource {
 
         //false because it is not posted on social yet, the value is checked later. First
         postedOnSocial.put(request.getId(), false);
+        
+        //JSON social API want
+        String authenticationURL = baseURL + "service-authentication.html" + "?request=" + request.getId();
+        RequestSocialDTO requestSocial = new RequestSocialDTO(request.getId(), authenticationURL);
 
-        return Response.ok().entity(gson.toJson(request)).build();
+        return Response.ok(gson.toJson(requestSocial)).build();
     }
 
     //Endpoint that receives a response when the end user authenticates on social 
     @POST
     @Path("authentication_callback")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String onAuthResponse(String content) throws Exception {
+    public Response onAuthResponse(String content) throws Exception {
 
         if (booking == null) {
             setUp();
         }
 
         social.onAuthResponse(content);
-        return null;
+        return Response.ok().build();
     }
 
     @GET
     @Path("posted_on_social")
     @Produces(MediaType.APPLICATION_JSON)
-    public String checkIfPostedOnSocial(@QueryParam("id") String userID) throws Exception {
+    public Response checkIfPostedOnSocial(@QueryParam("id") String userID) throws Exception {
         Boolean posted = postedOnSocial.get(userID);
         if (posted == null) {
             throw new Exception();
         }
         JsonObject response = new JsonObject();
         response.addProperty("isPosted", posted);
-        return gson.toJson(response);
+        return Response.ok(gson.toJson(response)).build();
     }
-
     
     private void createPost(AuthResponse authResponse) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost request = new HttpPost(baseURL + "posts/text");
+        HttpPost request = new HttpPost(apiBaseURL + "posts");
 
         SocialPost socialPost = new SocialPost("I've just booked a hotel on CPHotels!"); //should be hotelDTO (can also post images)
 
@@ -153,6 +161,5 @@ public class SocialResource {
 
         client.execute(request); //returns response
         client.close();
-
     }
 }

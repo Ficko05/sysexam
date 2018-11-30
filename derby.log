@@ -1,6 +1,7 @@
 ----------------------------------------------------------------
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Sun Nov 25 14:55:06 CET 2018:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-4b26-fe37-00000574c210 
 on database directory C:\Users\Krist\OneDrive\Documents\NetBeansProjects\sysexam\Users with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
@@ -30,6 +31,10 @@ Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 
 =======
 Thu Nov 29 11:40:04 CET 2018:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5f0d-e1a4-000005df7918 
+>>>>>>> master
+=======
+Fri Nov 30 13:38:32 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-64a0-b0a8-000005569d10 
 >>>>>>> master
 on database directory memory:C:\Users\Dradrach\Desktop\syseksamen\sysexam\testDB with class loader sun.misc.Launcher$AppClassLoader@232204a1 
 Loaded from file:/C:/Users/Dradrach/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
