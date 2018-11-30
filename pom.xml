@@ -71,11 +71,6 @@
             <version>10.14.2.0</version>
         </dependency>
         <dependency>
-            <groupId>socialSDK</groupId>
-            <artifactId>socialSDK</artifactId>
-            <version>0.34</version>
-        </dependency>
-        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -168,8 +163,8 @@
     </build>
 <repositories>
     <repository>
-        <id>lib</id>
-        <url>file:///${project.basedir}/lib</url>
+        <id>maven-repo</id>
+        <url>file:///${project.basedir}/maven-repo</url>
     </repository>
 </repositories>
 </project>
