@@ -61,7 +61,7 @@ public class SocialResource {
         apiBaseURL = baseURL + "api/";
 
         //The URL for the REST endpoint we tell social to call us back on
-        String authCallback = "http://0fcab971.ngrok.io/sysexam/api/social/authentication_callback";
+        String authCallback = "https://ionsight.dk/sysexam/api/social/authentication_callback";
 
         //MemoryAuthRequestStore saves an ID when our user clicks the button (before we call social API) 
         //When social call us back after the user has logged in on their site social call with that id (needed because they
@@ -115,38 +115,35 @@ public class SocialResource {
         String authenticationURL = baseURL + "service-authentication.html" + "?request=" + request.getId();
         RequestSocialDTO requestSocial = new RequestSocialDTO(request.getId(), authenticationURL);
 
-        return Response.ok().entity(gson.toJson(requestSocial)).build();
+        return Response.ok(gson.toJson(requestSocial)).build();
     }
 
     //Endpoint that receives a response when the end user authenticates on social 
     @POST
     @Path("authentication_callback")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String onAuthResponse(String content) throws Exception {
+    public Response onAuthResponse(String content) throws Exception {
 
         if (booking == null) {
             setUp();
         }
 
         social.onAuthResponse(content);
-        return null;
+        return Response.ok().build();
     }
 
     @GET
     @Path("posted_on_social")
     @Produces(MediaType.APPLICATION_JSON)
-    public String checkIfPostedOnSocial(@QueryParam("id") String userID) throws Exception {
+    public Response checkIfPostedOnSocial(@QueryParam("id") String userID) throws Exception {
         Boolean posted = postedOnSocial.get(userID);
         if (posted == null) {
             throw new Exception();
         }
         JsonObject response = new JsonObject();
         response.addProperty("isPosted", posted);
-        return gson.toJson(response);
+        return Response.ok(gson.toJson(response)).build();
     }
-
-    
-    
     
     private void createPost(AuthResponse authResponse) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
@@ -164,6 +161,5 @@ public class SocialResource {
 
         client.execute(request); //returns response
         client.close();
-
     }
 }
