@@ -56,7 +56,7 @@ public class SocialResource {
 
     private static void setUp() throws Exception {
         //The URL for socials REST API
-        baseURL = "http://b36c4c9d.ngrok.io/semester-3-exam-rest/";
+        baseURL = "https://tvestergaard.com/semester-3-exam-rest/";
         
         apiBaseURL = baseURL + "api/";
 
