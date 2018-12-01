@@ -1,6 +1,8 @@
 package facade;
 
 import entity.Hotel;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -32,12 +34,23 @@ public class HotelMapper {
         highestPrice = highestPrice == null ? Integer.MAX_VALUE : highestPrice;
 
         //example for zip code
-        TypedQuery<Hotel> query = em.createQuery("SELECT h FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
+        TypedQuery<Hotel> query = em.createQuery("Select r.hotel FROM Room r WHERE r.price BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
+        
+       // TypedQuery<Hotel> query = em.createQuery("SELECT h FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
         query.setParameter("lowestPrice", lowestPrice);
         query.setParameter("highestPrice", highestPrice);
 
         List<Hotel> hotels = query.getResultList();
-        return hotels;
+        
+        //Hack to get no duplicates
+        List<Hotel> hotelsNoDuplicates = new ArrayList<>();
+        LinkedHashSet<Hotel> hashSet = new LinkedHashSet<Hotel>();
+        for (Hotel hotel : hotels) {
+            if (hashSet.add(hotel)) 
+                hotelsNoDuplicates.add(hotel);
+        }
+        
+      return hotelsNoDuplicates;
 
     }
 
