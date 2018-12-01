@@ -22,6 +22,17 @@ public class Room implements Serializable {
     private Integer id;
     
     private int price;
+
+    public Room(Integer id, int price, Hotel hotel) {
+        this.id = id;
+        this.price = price;
+        this.hotel = hotel;
+    }
+
+    public Room(Integer id, int price) {
+        this.id = id;
+        this.price = price;
+    }
     
     @ManyToOne
     private Hotel hotel;

@@ -96,4 +96,16 @@ public class User implements Serializable {
         roleList.add(userRole);
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+    
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
 }
