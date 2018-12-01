@@ -60,7 +60,7 @@ public class HotelResource {
     @Path("simple")
     @Produces(MediaType.APPLICATION_JSON)
     public String getHotels(@QueryParam("lowestPrice") Integer lowestPrice,
-            @QueryParam("highestPrice") Integer highestPrice ){
+            @QueryParam("highestPrice") Integer highestPrice) {
 
         List<Hotel> hotels = hm.getHotelsByPrice(lowestPrice, highestPrice);
         for (Hotel hotel : hotels) {
@@ -86,6 +86,11 @@ public class HotelResource {
     @Path("{id}")
     public Response getHotel(@PathParam("id") int id) throws Exception {
         Hotel hotel = hm.getHotel(id);
+
+        if (hotel == null) {
+            throw new Exception();
+        }
+
         HotelDTO hotelDTO = HotelDTO.getHotelDTO(hotel);
         DataUriEncoder uriEncoder = new DataUriEncoder();
         String full = uriEncoder.encode(hotelDTO.getPicture(), ImageType.fromData(hotelDTO.getPicture()));
@@ -100,29 +105,28 @@ public class HotelResource {
 
     /**
      * returns list of Hotels in JSON from a given ZipS
+     *
      * @param zip
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @GET
-    @Produces (MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("zip/{zip}")
-    public String getHotelFromZip(@PathParam("zip") int zip) throws Exception{
+    public String getHotelFromZip(@PathParam("zip") int zip) throws Exception {
         List<Hotel> hotel = hm.getHotelsFromZip(zip);
         List<HotelDTO> hotelDTOs = HotelDTO.withoutPicture(hotel);
-        
+
         for (HotelDTO hotelDTO : hotelDTOs) {
             //way to specific, should be done in front end (but is not because we couldn't get it to work with react bootstrap table)
-            //can also give out of bounds if under 40
+            if(hotelDTO.getDescription().length() >= 40)
             hotelDTO.setDescription(hotelDTO.getDescription().substring(0, 40) + "...");
         }
         if (hotelDTOs == null || hotelDTOs.isEmpty()) {
             throw new Exception();//TODO
         }
-        
+
         return gson.toJson(hotelDTOs);
     }
-    
-    
 
 }

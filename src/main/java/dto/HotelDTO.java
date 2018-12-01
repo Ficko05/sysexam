@@ -27,11 +27,25 @@ public class HotelDTO {
         this.rating = rating;
         this.zipCode = zipCode;
         this.picture = picture;
-        this.lowestPrice = -1;
         this.rooms = rooms;
+        
+        Integer lowestPrice = null;
+        
+        for (RoomDTO room : rooms) {
+            if(lowestPrice == null){
+                lowestPrice = room.getPrice();
+            }
+            if (room.getPrice() < lowestPrice){
+                lowestPrice = room.getPrice();
+            }
+        }
+        
+        if(lowestPrice == null) {
+            this.lowestPrice = -1;
+        } else {
+            this.lowestPrice = lowestPrice;
+        }
     }
-
-    
 
     public HotelDTO(Hotel hotel) {
         this.id = hotel.getId();

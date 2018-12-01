@@ -28,12 +28,10 @@ public class HotelMapper {
     public List<Hotel> getHotelsByPrice(Integer lowestPrice, Integer highestPrice) {
         EntityManager em = emf.createEntityManager();
 
-        //rip
         lowestPrice = lowestPrice == null ? Integer.MIN_VALUE : lowestPrice;
         highestPrice = highestPrice == null ? Integer.MAX_VALUE : highestPrice;
 
         //example for zip code
-        //TypedQuery<Hotel> queryTest = em.createQuery("SELECT h. FROM Hotel h", Hotel.class);
         TypedQuery<Hotel> query = em.createQuery("SELECT h FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
         query.setParameter("lowestPrice", lowestPrice);
         query.setParameter("highestPrice", highestPrice);
