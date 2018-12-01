@@ -1,11 +1,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,12 +45,20 @@ public class Hotel implements Serializable {
     @Column(length = 30_000, name = "PICTURE")
     private byte[] picture;
     
-    @OneToMany
-    private List<Room> rooms;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="hotel")
+    private List<Room> rooms = new ArrayList<>();
 
     public Hotel() {
     }
 
+    public Hotel(Integer id, String name, String description, int rating, int zipCode) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.zipCode = zipCode;
+    }
+    
     public Hotel(Integer id, String name, String description, int rating, int zipCode, byte[] picture) {
         this.id = id;
         this.name = name;
@@ -58,12 +68,26 @@ public class Hotel implements Serializable {
         this.picture = picture;
     }
 
+    public Hotel(Integer id, String name, String description, int rating, int zipCode, byte[] picture, List<Room> rooms) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.zipCode = zipCode;
+        this.picture = picture;
+        this.rooms = rooms;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public List<Room> getRooms() {
         return rooms;
+    }
+    
+    public void addRoom(Room room) {
+        rooms.add(room);
     }
 
     public void setRooms(List<Room> rooms) {
@@ -109,6 +133,12 @@ public class Hotel implements Serializable {
     public void setPicture(byte[] picture) {
         this.picture = picture;
     }
+    
+    public void removePicture(){
+        this.picture = null;
+    }
+    
+    
 
     @Override
     public int hashCode() {

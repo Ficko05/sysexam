@@ -1,10 +1,10 @@
 package facade;
 
-import dto.UserDTO;
 import entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -16,7 +16,7 @@ public class UserMapper {
         this.emf = emf;
     }
 
-    public UserDTO create(User user) {
+    public User create(User user) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -29,40 +29,39 @@ public class UserMapper {
         } finally {
             em.close();
         }
-        return new UserDTO(user);
+        return user;
 
     }
 
-    public UserDTO delete(String userName) {
+    public User delete(String userName) {
         EntityManager em = emf.createEntityManager();
-        UserDTO userDTO;
+        User user;
 
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u where u.userName =:userName ", User.class);
         query.setParameter("userName", userName);
 
         try {
-            User user = query.getSingleResult();
-            userDTO = new UserDTO(user);
+            user = query.getSingleResult();
 
             em.getTransaction().begin();
             em.remove(user);
             em.getTransaction().commit();
 
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             return null;
         } finally {
             em.close();
 
         }
-        return userDTO;
+        return user;
 
     }
 
-    public UserDTO update(User user) {
+    public User update(User user) {
 
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("UPDATE USER u SET u.userPass =: userPass, u.roleList =:roleList where u.userName =:userName");
+        Query query = em.createQuery("UPDATE User u SET u.userPass =: userPass, u.roleList =:roleList where u.userName =:userName");
         
         query.setParameter("userName", user.getUserName());
         query.setParameter("userPass", user.getUserPass());
@@ -73,32 +72,32 @@ public class UserMapper {
             query.executeUpdate();
             em.getTransaction().commit();
             
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             return null;
         }finally{
             em.close();
         }
         
-        return new UserDTO(user);
+        return user;
     }
 
-    public UserDTO getUser(String userName){
+    public User getUser(String userName){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<UserDTO> query = em.createQuery("SELECT new DTO.UserDTO(u) FROM User u where u.userName =: userName", UserDTO.class);
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u where u.userName =: userName", User.class);
         query.setParameter("userName", userName);
-        UserDTO user;
+        User user;
         try {
             user = query.getSingleResult();
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             return null;
         }
         return user;
     }
     
-    public List<UserDTO> getAllUsers(){
+    public List<User> getAllUsers(){
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT new DTO.UserDTO(u) FROM User u", UserDTO.class);
-        List<UserDTO> user = query.getResultList();
+        Query query = em.createQuery("SELECT u FROM User u", User.class);
+        List<User> user = query.getResultList();
         return user;
         
     }

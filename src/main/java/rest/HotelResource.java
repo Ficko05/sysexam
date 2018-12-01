@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import dto.HotelDTO;
+import entity.Hotel;
 import facade.HotelMapper;
 import imageHandling.DataUriEncoder;
 import imageHandling.ImageType;
@@ -51,6 +52,8 @@ public class HotelResource {
     /**
      * Retrieves representation of an instance of rest.HotelResource
      *
+     * @param lowestPrice
+     * @param highestPrice
      * @return an instance of java.lang.String
      */
     @GET
@@ -59,13 +62,13 @@ public class HotelResource {
     public String getHotels(@QueryParam("lowestPrice") Integer lowestPrice,
             @QueryParam("highestPrice") Integer highestPrice ){
 
-        List<HotelDTO> hotels = hm.getHotelsByPrice(lowestPrice, highestPrice);
-        for (HotelDTO hotel : hotels) {
+        List<Hotel> hotels = hm.getHotelsByPrice(lowestPrice, highestPrice);
+        for (Hotel hotel : hotels) {
             hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
         }
-        System.out.println(hotels);
+        List<HotelDTO> hotelDTOs = HotelDTO.withoutPicture(hotels);
 
-        return gson.toJson(hotels);
+        return gson.toJson(hotelDTOs);
     }
 
     /**
@@ -82,7 +85,8 @@ public class HotelResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response getHotel(@PathParam("id") int id) throws Exception {
-        HotelDTO hotelDTO = hm.getHotel(id);
+        Hotel hotel = hm.getHotel(id);
+        HotelDTO hotelDTO = HotelDTO.getHotelDTO(hotel);
         DataUriEncoder uriEncoder = new DataUriEncoder();
         String full = uriEncoder.encode(hotelDTO.getPicture(), ImageType.fromData(hotelDTO.getPicture()));
         hotelDTO.setPicture(null);
@@ -104,13 +108,15 @@ public class HotelResource {
     @Produces (MediaType.APPLICATION_JSON)
     @Path("zip/{zip}")
     public String getHotelFromZip(@PathParam("zip") int zip) throws Exception{
-        List<HotelDTO> hotelDTOs = hm.getHotelsFromZip(zip);
+        List<Hotel> hotel = hm.getHotelsFromZip(zip);
+        List<HotelDTO> hotelDTOs = HotelDTO.withoutPicture(hotel);
         
-        for (HotelDTO hotel : hotelDTOs) {
-            hotel.setDescription(hotel.getDescription().substring(0, 40) + "...");
-//            hotel.setPicture(null);
+        for (HotelDTO hotelDTO : hotelDTOs) {
+            //way to specific, should be done in front end (but is not because we couldn't get it to work with react bootstrap table)
+            //can also give out of bounds if under 40
+            hotelDTO.setDescription(hotelDTO.getDescription().substring(0, 40) + "...");
         }
-        if (hotelDTOs == null ^ hotelDTOs.isEmpty()) {
+        if (hotelDTOs == null || hotelDTOs.isEmpty()) {
             throw new Exception();//TODO
         }
         

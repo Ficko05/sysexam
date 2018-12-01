@@ -106,7 +106,8 @@ public class DemoResource {
     //@RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteUser(@PathParam("userName") String userName) throws Exception {
-        UserDTO userDTO = um.delete(userName);
+        User user = um.delete(userName);
+        UserDTO userDTO = UserDTO.getUserDTO(user);
 
         if (userDTO == null) {
             throw new Exception();
@@ -124,7 +125,8 @@ public class DemoResource {
         user.addRole(new Role("user"));
         user.hashPassword();
         
-        UserDTO userDTO = um.create(user);
+        User returnedUser = um.create(user);
+        UserDTO userDTO = UserDTO.getUserDTO(returnedUser);
 
         if (userDTO == null) {
             throw new Exception();

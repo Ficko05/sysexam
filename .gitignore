@@ -20,3 +20,5 @@ persistence.xml
 /src/main/resources/META-INF/persistence.xml
 /testDB
 /Users
+
+/src/main/java/dto/DTOs.java

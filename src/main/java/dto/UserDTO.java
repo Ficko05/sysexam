@@ -25,6 +25,10 @@ public class UserDTO {
         this.userName = userName;
 
     }
+    
+    public static UserDTO getUserDTO(User user) {
+        return new UserDTO(user);
+    }
 
     public String getUserName() {
         return userName;
