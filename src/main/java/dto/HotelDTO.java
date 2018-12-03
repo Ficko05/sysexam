@@ -54,9 +54,23 @@ public class HotelDTO {
         this.rating = hotel.getRating();
         this.zipCode = hotel.getZipCode();
         this.picture = hotel.getPicture();
+        Integer lowestPrice = null;
 
         for (Room room : hotel.getRooms()) {
             rooms.add(RoomDTO.convert(room));
+            
+            if(lowestPrice == null){
+                lowestPrice = room.getPrice();
+            }
+            if (room.getPrice() < lowestPrice){
+                lowestPrice = room.getPrice();
+            }
+        }
+        
+        if(lowestPrice == null) {
+            this.lowestPrice = -1;
+        } else {
+            this.lowestPrice = lowestPrice;
         }
     }
     
