@@ -1,6 +1,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +36,18 @@ public class Order implements Serializable {
 
     @OneToOne
     private Room room;
+
+    public Order() {
+    }
+
+    public Order(User user, String startDate, int days, Room room) throws ParseException {
+        this.user = user;
+        
+        this.startDate = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);  
+        
+        this.days = days;
+        this.room = room;
+    }
 
     public Integer getId() {
         return id;

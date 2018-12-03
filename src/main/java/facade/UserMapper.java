@@ -83,7 +83,7 @@ public class UserMapper {
 
     public User getUser(String userName){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<User> query = em.createQuery("SELECT u FROM User u where u.userName =: userName", User.class);
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u where u.userName =:userName", User.class);
         query.setParameter("userName", userName);
         User user;
         try {

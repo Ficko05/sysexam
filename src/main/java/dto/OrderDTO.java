@@ -1,5 +1,6 @@
 package dto;
 
+import entity.Order;
 import entity.Room;
 import entity.User;
 import java.util.Date;
@@ -9,20 +10,37 @@ import java.util.Date;
  */
 public class OrderDTO {
 
-    private User user;
     private Date startDate;
     private int days;
-    private Room room;
+    private RoomDTO roomDTO;
 
-
-    public User getUser() {
-        return user;
+    public OrderDTO() {
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public OrderDTO(Date startDate, int days, RoomDTO roomDTO) {
+        this.startDate = startDate;
+        this.days = days;
+        this.roomDTO = roomDTO;
+    }
+    
+        public OrderDTO(Date startDate, int days, Room room) {
+        this.startDate = startDate;
+        this.days = days;
+     this.roomDTO = RoomDTO.convert(room);
+    }
+        
+        public static OrderDTO convert(Order order){
+           return new OrderDTO(order.getStartDate(), order.getDays(), order.getRoom()); 
+        }
+
+    public RoomDTO getRoomDTO() {
+        return roomDTO;
     }
 
+    public void setRoomDTO(RoomDTO roomDTO) {
+        this.roomDTO = roomDTO;
+    }
+    
     public Date getStartDate() {
         return startDate;
     }
@@ -38,16 +56,4 @@ public class OrderDTO {
     public void setDays(int days) {
         this.days = days;
     }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    
-    
-    
 }

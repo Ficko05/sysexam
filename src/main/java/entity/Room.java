@@ -23,6 +23,9 @@ public class Room implements Serializable {
     
     private int price;
 
+    public Room() {
+    }
+
     public Room(Integer id, int price, Hotel hotel) {
         this.id = id;
         this.price = price;
