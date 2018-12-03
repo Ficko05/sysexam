@@ -43,7 +43,7 @@ public class Order implements Serializable {
     public Order(User user, String startDate, int days, Room room) throws ParseException {
         this.user = user;
         
-        this.startDate = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);  
+        this.startDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);  
         
         this.days = days;
         this.room = room;
