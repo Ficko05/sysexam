@@ -13,6 +13,7 @@ import entity.Hotel;
 import facade.HotelMapper;
 import imageHandling.DataUriEncoder;
 import imageHandling.ImageType;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -72,6 +73,30 @@ public class HotelResource {
         return gson.toJson(hotelDTOs);
     }
 
+    @GET
+    @Path("favourites")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getfavouriteHotels() throws Exception {
+        DataUriEncoder uriEncoder = new DataUriEncoder();
+
+        List<Hotel> hotels = hm.getFavouriteHotels();
+        List<HotelDTO> hotelDTOs = HotelDTO.withPicture(hotels);
+
+        List<JsonElement> jsonElements = new ArrayList<>();
+        for (HotelDTO hotelDTO : hotelDTOs) {
+            String full = uriEncoder.encode(hotelDTO.getPicture(), ImageType.fromData(hotelDTO.getPicture()));
+            hotelDTO.setPicture(null);
+            JsonElement jsonElement = gson.toJsonTree(hotelDTO);
+            jsonElement.getAsJsonObject().addProperty("picture", full);
+            jsonElements.add(jsonElement);
+
+        }
+        if (hotels == null) {
+            throw new Exception();//TODO
+        }
+        return Response.ok(gson.toJson(jsonElements)).build();
+    }
+
     /**
      * PUT method for updating or creating an instance of HotelResource
      *
@@ -120,8 +145,9 @@ public class HotelResource {
 
         for (HotelDTO hotelDTO : hotelDTOs) {
             //way to specific, should be done in front end (but is not because we couldn't get it to work with react bootstrap table)
-            if(hotelDTO.getDescription().length() >= 40)
-            hotelDTO.setDescription(hotelDTO.getDescription().substring(0, 40) + "...");
+            if (hotelDTO.getDescription().length() >= 40) {
+                hotelDTO.setDescription(hotelDTO.getDescription().substring(0, 40) + "...");
+            }
         }
         if (hotelDTOs == null || hotelDTOs.isEmpty()) {
             throw new Exception();//TODO

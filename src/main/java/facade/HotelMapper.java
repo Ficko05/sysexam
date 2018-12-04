@@ -16,10 +16,10 @@ public class HotelMapper {
     public HotelMapper(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
+
     public List<Hotel> getHotels() {
         EntityManager em = emf.createEntityManager();
-        
+
         //example for zip code
         TypedQuery<Hotel> query = em.createQuery("SELECT new entity.Hotel(h.id, h.name, h.description, h.rating, h.zipCode) FROM Hotel h", Hotel.class);
 
@@ -35,22 +35,34 @@ public class HotelMapper {
 
         //example for zip code
         TypedQuery<Hotel> query = em.createQuery("Select r.hotel FROM Room r WHERE r.price BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
-        
-       // TypedQuery<Hotel> query = em.createQuery("SELECT h FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
+
+        // TypedQuery<Hotel> query = em.createQuery("SELECT h FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
         query.setParameter("lowestPrice", lowestPrice);
         query.setParameter("highestPrice", highestPrice);
 
         List<Hotel> hotels = query.getResultList();
-        
+
         //Hack to get no duplicates
         List<Hotel> hotelsNoDuplicates = new ArrayList<>();
         LinkedHashSet<Hotel> hashSet = new LinkedHashSet<Hotel>();
         for (Hotel hotel : hotels) {
-            if (hashSet.add(hotel)) 
+            if (hashSet.add(hotel)) {
                 hotelsNoDuplicates.add(hotel);
+            }
         }
-        
-      return hotelsNoDuplicates;
+
+        return hotelsNoDuplicates;
+
+    }
+
+    public List<Hotel> getFavouriteHotels() {
+
+        EntityManager em = emf.createEntityManager();
+
+        TypedQuery<Hotel> query = em.createQuery("SELECT new entity.Hotel(h.id, h.name, h.description, h.rating, h.picture) FROM Hotel h ORDER BY h.rating DESC", Hotel.class);
+        query.setMaxResults(5);
+        List<Hotel> hotels = query.getResultList();
+        return hotels;
 
     }
 
@@ -68,17 +80,18 @@ public class HotelMapper {
         return hotelDTO;
 
     }
+
     /**
-     * Method takes a ZipCode and returns a list of all matching Hotel(DTO)
-     * with given ZipCode
+     * Method takes a ZipCode and returns a list of all matching Hotel(DTO) with given ZipCode
+     *
      * @param zipCode
-     * @return 
+     * @return
      */
     public List<Hotel> getHotelsFromZip(int zipCode) {
         EntityManager em = emf.createEntityManager();
         //Should have multiple queries so ONLY the necessary data is retrieved
         TypedQuery<Hotel> query = em.createQuery("SELECT h FROM Hotel h WHERE h.zipCode =:zipCode", Hotel.class);
-        
+
         query.setParameter("zipCode", zipCode);
         return query.getResultList();
     }

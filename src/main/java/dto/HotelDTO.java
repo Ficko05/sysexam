@@ -28,19 +28,19 @@ public class HotelDTO {
         this.zipCode = zipCode;
         this.picture = picture;
         this.rooms = rooms;
-        
+
         Integer lowestPrice = null;
-        
+
         for (RoomDTO room : rooms) {
-            if(lowestPrice == null){
+            if (lowestPrice == null) {
                 lowestPrice = room.getPrice();
             }
-            if (room.getPrice() < lowestPrice){
+            if (room.getPrice() < lowestPrice) {
                 lowestPrice = room.getPrice();
             }
         }
-        
-        if(lowestPrice == null) {
+
+        if (lowestPrice == null) {
             this.lowestPrice = -1;
         } else {
             this.lowestPrice = lowestPrice;
@@ -58,40 +58,54 @@ public class HotelDTO {
 
         for (Room room : hotel.getRooms()) {
             rooms.add(RoomDTO.convert(room));
-            
-            if(lowestPrice == null){
+
+            if (lowestPrice == null) {
                 lowestPrice = room.getPrice();
             }
-            if (room.getPrice() < lowestPrice){
+            if (room.getPrice() < lowestPrice) {
                 lowestPrice = room.getPrice();
             }
         }
-        
-        if(lowestPrice == null) {
+
+        if (lowestPrice == null) {
             this.lowestPrice = -1;
         } else {
             this.lowestPrice = lowestPrice;
         }
     }
-    
-    
+
     public static HotelDTO withoutPicture(Hotel hotel) {
-        return new HotelDTO(hotel.getId(), hotel.getName(), hotel.getDescription(), hotel.getRating(), hotel.getZipCode(), null, 
-        RoomDTO.convert(hotel.getRooms()));
+        return new HotelDTO(hotel.getId(), hotel.getName(), hotel.getDescription(), hotel.getRating(), hotel.getZipCode(), null,
+                RoomDTO.convert(hotel.getRooms()));
     }
-     
+
     public static List<HotelDTO> withoutPicture(List<Hotel> hotels) {
         List<HotelDTO> results = new ArrayList<>();
-        for(Hotel hotel : hotels)
+        for (Hotel hotel : hotels) {
             results.add(HotelDTO.withoutPicture(hotel));
-        
+        }
+
         return results;
     }
-    
+
+    public static HotelDTO withPicture(Hotel hotel) {
+        return new HotelDTO(hotel.getId(), hotel.getName(), hotel.getDescription(), hotel.getRating(), hotel.getZipCode(), hotel.getPicture(),
+                RoomDTO.convert(hotel.getRooms()));
+    }
+
+    public static List<HotelDTO> withPicture(List<Hotel> hotels) {
+        List<HotelDTO> results = new ArrayList<>();
+        for (Hotel hotel : hotels) {
+            results.add(HotelDTO.withPicture(hotel));
+        }
+
+        return results;
+    }
+
     public static HotelDTO getHotelDTO(Hotel hotel) {
         return new HotelDTO(hotel);
     }
-    
+
     public static List<HotelDTO> getHotelDTOs(List<Hotel> hotels) {
         List<HotelDTO> hotelDTOs = new ArrayList<>();
         for (Hotel hotel : hotels) {
