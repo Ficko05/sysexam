@@ -22,32 +22,31 @@ import org.junit.runners.Suite;
  *
  * @author Dradrach
  */
-//@RunWith(Suite.class)
+@RunWith(Suite.class)
+
+@Suite.SuiteClasses({
+    //HotelMapperT.class
+})
+
+public class SuiteTest {
+private static EntityManagerFactory emf;
+    
+    @BeforeClass
+    public static void SetupDB(){
+        System.out.println("Setup DB");
+        emf = Persistence.createEntityManagerFactory("test");
+        EntityManager em = emf.createEntityManager();
 //
-//@Suite.SuiteClasses({
-//    HotelMapperT.class
-//})
-//
-//public class SuiteTest {
-//private static EntityManagerFactory emf;
-//    
-//    @BeforeClass
-//    public static void SetupDB(){
-//        System.out.println("Setup DB");
-//        emf = Persistence.createEntityManagerFactory("test");
-//        System.out.println("Setup emf " + emf);
-//        EntityManager em = emf.createEntityManager();
-//
-//        em.getTransaction().begin();
-//        Role userRole = new Role("user");
-//        Role adminRole = new Role("admin");
-//        User user = new User("user", "test");
-//        user.addRole(userRole);
-//        User admin = new User("admin", "test");
-//        admin.addRole(adminRole);
-//        User both = new User("user_admin", "test");
-//        both.addRole(userRole);
-//        both.addRole(adminRole);
+        em.getTransaction().begin();
+        Role userRole = new Role("user");
+        Role adminRole = new Role("admin");
+        User user = new User("user", "test");
+        user.addRole(userRole);
+        User admin = new User("admin", "test");
+        admin.addRole(adminRole);
+        User both = new User("user_admin", "test");
+        both.addRole(userRole);
+        both.addRole(adminRole);
 //        
 //        //id, name, description, rating, zipCode, picture
 //        Hotel hotel1 = new Hotel(1, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
@@ -72,19 +71,19 @@ import org.junit.runners.Suite;
 //        em.persist(hotel3);
 //        em.persist(hotel4);
 //        em.persist(hotel5);
-//        em.persist(userRole);
-//        em.persist(adminRole);
-//        em.persist(user);
-//        em.persist(admin);
-//        em.persist(both);
-//        
-//        em.getTransaction().commit();
-//        
-//    }
-//
-//    public static EntityManagerFactory getEmf() {
-//        return emf;
-//    }
-//    
-//    
-//}
+        em.persist(userRole);
+        em.persist(adminRole);
+        em.persist(user);
+        em.persist(admin);
+        em.persist(both);
+        
+        em.getTransaction().commit();
+        
+    }
+
+    public static EntityManagerFactory getEmf() {
+        return emf;
+    }
+    
+    
+}

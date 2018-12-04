@@ -61,7 +61,7 @@ public class SocialResource {
         apiBaseURL = baseURL + "api/";
 
         //The URL for the REST endpoint we tell social to call us back on
-        String authCallback = "https://ionsight.dk/sysexam/api/social/authentication_callback";
+        String authCallback = "http://0ab20183.ngrok.io/sysexam/api/social/authentication_callback";
 
         //MemoryAuthRequestStore saves an ID when our user clicks the button (before we call social API) 
         //When social call us back after the user has logged in on their site social call with that id (needed because they
