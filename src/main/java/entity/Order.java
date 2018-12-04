@@ -34,7 +34,7 @@ public class Order implements Serializable {
     private Date startDate;
     private int days;
 
-    @OneToOne
+    @OneToOne()
     private Room room;
 
     public Order() {

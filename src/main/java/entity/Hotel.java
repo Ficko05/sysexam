@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,7 @@ public class Hotel implements Serializable {
     @Column(length = 30_000, name = "PICTURE")
     private byte[] picture;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy="hotel")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="hotel", cascade = CascadeType.PERSIST)
     private List<Room> rooms = new ArrayList<>();
 
     public Hotel() {

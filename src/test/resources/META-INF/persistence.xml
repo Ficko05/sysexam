@@ -17,10 +17,13 @@
     <class>entity.Hotel</class>
     <class>entity.Role</class>
     <class>entity.User</class>
+    <class>entity.Room</class>
+    <class>entity.Order</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:testDB;create=true"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+      <property name="eclipselink.target-database" value="Derby"/>
     <!-->  <property name="javax.persistence.jdbc.url" value="jdbc:derby:Users;create=true"/> -->
       <property name="eclipselink.logging.level" value="WARNING"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
