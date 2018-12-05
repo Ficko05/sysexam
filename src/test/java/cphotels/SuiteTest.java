@@ -13,6 +13,7 @@ import javax.persistence.Persistence;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import rest.OrderResourceT;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,7 +29,8 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({
     HotelMapperT.class,
-    OrderMapperT.class 
+    OrderMapperT.class
+   // OrderResourceT.class 
 })
 
 public class SuiteTest {
