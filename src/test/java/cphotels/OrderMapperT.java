@@ -32,4 +32,12 @@ public class OrderMapperT {
         assertEquals(2, orders.size());
     }
     
+    @Test
+    public void testGetOrdersFromUserNonExisting() {
+        String username = "not a user";
+        
+        List<Order> orders = om.getOrdersFromUser(username);
+        
+        assertEquals(0, orders.size());
+    }
 }
