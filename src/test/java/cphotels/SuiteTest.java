@@ -2,9 +2,11 @@ package cphotels;
 
 
 import entity.Hotel;
+import entity.Order;
 import entity.Role;
 import entity.Room;
 import entity.User;
+import java.text.ParseException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,18 +27,20 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-    HotelMapperT.class
+    HotelMapperT.class,
+    OrderMapperT.class 
 })
 
 public class SuiteTest {
 private static EntityManagerFactory emf;
     
     @BeforeClass
-    public static void SetupDB(){
+    public static void SetupDB() throws ParseException{
         System.out.println("Setup DB");
         emf = Persistence.createEntityManagerFactory("test");
         EntityManager em = emf.createEntityManager();
-//
+
+//Users and roles
         em.getTransaction().begin();
         Role userRole = new Role("user");
         Role adminRole = new Role("admin");
@@ -47,7 +51,14 @@ private static EntityManagerFactory emf;
         User both = new User("user_admin", "test");
         both.addRole(userRole);
         both.addRole(adminRole);
+           
+        em.persist(userRole);
+        em.persist(adminRole);
+        em.persist(user);
+        em.persist(admin);
+        em.persist(both);
         
+//Hotels
 //        //id, name, description, rating, zipCode, picture
         Hotel hotel1 = new Hotel(1, "firstHotel", "First Hotel", 10, 1000, new byte[1]);
         Hotel hotel2 = new Hotel(2, "secondHotel", "First Hotel", 10, 1000, new byte[1]);
@@ -72,13 +83,16 @@ private static EntityManagerFactory emf;
         em.persist(hotel3);
         em.persist(hotel4);
         em.persist(hotel5);
+
+//Orders
+
+        Order order1 = new Order(user, "2018-10-31", 4, room2);
+        Order order2 = new Order(user, "1993-01-16", 1000, room1);
         
-        em.persist(userRole);
-        em.persist(adminRole);
-        em.persist(user);
-        em.persist(admin);
-        em.persist(both);
-//        
+        em.persist(order1);
+        em.persist(order2);
+        
+        
         em.getTransaction().commit();
         
     }
