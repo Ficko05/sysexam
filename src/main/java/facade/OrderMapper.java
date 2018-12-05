@@ -48,7 +48,7 @@ public class OrderMapper {
     public List<Order> getOrdersFromUser(String username) {
        EntityManager em = emf.createEntityManager();
        
-       TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.user.userName = :username", Order.class);
+       TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.user.userName = :username ORDER BY o.startDate DESC", Order.class);
        query.setParameter("username", username);
        
 

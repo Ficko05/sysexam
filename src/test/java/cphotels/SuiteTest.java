@@ -86,8 +86,8 @@ private static EntityManagerFactory emf;
 
 //Orders
 
-        Order order1 = new Order(user, "2018-10-31", 4, room2);
-        Order order2 = new Order(user, "1993-01-16", 1000, room1);
+        Order order1 = new Order(user, "1993-01-16", 4, room2);
+        Order order2 = new Order(user, "2018-10-31", 1000, room1);
         
         em.persist(order1);
         em.persist(order2);

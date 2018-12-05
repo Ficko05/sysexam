@@ -66,6 +66,7 @@ public class OrderResource {
         ReceivedBookingDTO booking = gson.fromJson(bookingDetails, ReceivedBookingDTO.class);
         
         //Should be on ID, not name I guess
+        //Should be in a logic layer
         String username = securityContext.getUserPrincipal().getName();
         User user = um.getUser(username);
         Room room = rm.getRoom(booking.getRoomID());
