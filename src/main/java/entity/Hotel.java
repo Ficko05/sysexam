@@ -78,14 +78,14 @@ public class Hotel implements Serializable {
         this.picture = picture;
         this.rooms = rooms;
     }
+    
     public Hotel(Integer id, String name, String description, int rating, byte[] picture) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.rating = rating;
-        this.zipCode = zipCode;
         this.picture = picture;
-        this.rooms = rooms;
+    ;
     }
 
     public Integer getId() {
