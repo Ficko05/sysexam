@@ -3,7 +3,9 @@ package dto;
 import entity.Order;
 import entity.Room;
 import entity.User;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 /**
  *
  * @author Kristian
@@ -31,6 +33,16 @@ public class OrderDTO {
         
         public static OrderDTO convert(Order order){
            return new OrderDTO(order.getStartDate(), order.getDays(), order.getRoom()); 
+        }
+        
+        public static List<OrderDTO> convert(List<Order> orders) {
+            List<OrderDTO> orderDTOs = new ArrayList<>();
+            
+            for (Order order : orders) {
+                OrderDTO orderDTO = convert(order);
+                orderDTOs.add(orderDTO);
+            }
+            return orderDTOs;
         }
 
     public RoomDTO getRoomDTO() {

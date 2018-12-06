@@ -2,8 +2,10 @@ package facade;
 
 import entity.Hotel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -33,7 +35,6 @@ public class HotelMapper {
         lowestPrice = lowestPrice == null ? Integer.MIN_VALUE : lowestPrice;
         highestPrice = highestPrice == null ? Integer.MAX_VALUE : highestPrice;
 
-        //example for zip code
         TypedQuery<Hotel> query = em.createQuery("Select r.hotel FROM Room r WHERE r.price BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
 
         // TypedQuery<Hotel> query = em.createQuery("SELECT h FROM Hotel h where h.zipCode BETWEEN :lowestPrice AND :highestPrice", Hotel.class);
@@ -42,16 +43,12 @@ public class HotelMapper {
 
         List<Hotel> hotels = query.getResultList();
 
-        //Hack to get no duplicates
-        List<Hotel> hotelsNoDuplicates = new ArrayList<>();
-        LinkedHashSet<Hotel> hashSet = new LinkedHashSet<Hotel>();
-        for (Hotel hotel : hotels) {
-            if (hashSet.add(hotel)) {
-                hotelsNoDuplicates.add(hotel);
-            }
+               Map<Integer, Hotel> map = new HashMap<>();
+        for(Hotel hotel : hotels) {
+            map.put(hotel.getId(), hotel);
         }
 
-        return hotelsNoDuplicates;
+        return new ArrayList<>(map.values());
 
     }
 
@@ -63,7 +60,6 @@ public class HotelMapper {
         query.setMaxResults(5);
         List<Hotel> hotels = query.getResultList();
         return hotels;
-
     }
 
     public Hotel getHotel(int id) {

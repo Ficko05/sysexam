@@ -10,8 +10,10 @@ import entity.Order;
 import entity.Room;
 import entity.User;
 import java.text.ParseException;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -19,8 +21,6 @@ import javax.persistence.EntityManagerFactory;
  */
 public class OrderMapper {
     EntityManagerFactory emf;
-    RoomMapper rm = new RoomMapper(emf);
-    UserMapper um = new UserMapper(emf);
 
     public OrderMapper(EntityManagerFactory emf) {
         this.emf = emf;
@@ -44,4 +44,15 @@ public class OrderMapper {
         }
         return order;
     }
+
+    public List<Order> getOrdersFromUser(String username) {
+       EntityManager em = emf.createEntityManager();
+       
+       TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.user.userName = :username ORDER BY o.startDate DESC", Order.class);
+       query.setParameter("username", username);
+       
+
+        return query.getResultList();
+}
+    
 }

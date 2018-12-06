@@ -17,6 +17,7 @@ import facade.OrderMapper;
 import facade.RoomMapper;
 import facade.UserMapper;
 import java.text.ParseException;
+import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,9 +25,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 /**
@@ -66,6 +69,7 @@ public class OrderResource {
         ReceivedBookingDTO booking = gson.fromJson(bookingDetails, ReceivedBookingDTO.class);
         
         //Should be on ID, not name I guess
+        //Should be in a logic layer
         String username = securityContext.getUserPrincipal().getName();
         User user = um.getUser(username);
         Room room = rm.getRoom(booking.getRoomID());
@@ -74,5 +78,19 @@ public class OrderResource {
         OrderDTO orderDTO = OrderDTO.convert(order);
         
         return gson.toJson(orderDTO, OrderDTO.class);
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("user")
+    public Response getOrdersFromLoggedInUser() throws ParseException {
+        
+        String username = securityContext.getUserPrincipal().getName();
+        
+        List<Order> orders = om.getOrdersFromUser(username);
+        
+        List<OrderDTO> orderDTOs = OrderDTO.convert(orders);
+        
+        return Response.ok(orderDTOs).build();
     }
 }
